@@ -49,7 +49,7 @@ int used_size = 0;
 void set_add(unsigned char* id) {
     if (used_size + ID_SIZE > alloc_size) {
         alloc_size = (alloc_size + ID_SIZE) * 2;
-        set = realloc(set, alloc_size);
+        set = (unsigned char*)realloc(set, alloc_size);
         if (set == NULL) {
             printf("FATAL: No memory\n");
             exit(1);

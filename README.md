@@ -5,6 +5,13 @@ In cygwin, type ```make``` and it will generate a ```flash.exe```. The executive
 
 If you want to run without cygwin, please create a Visual Studio project, add ```flash.c``` to the project and compile.
 
+In Visual Studio, please add a following line to the head of ```stdafx.h```:
+```
+#define _CRT_SECURE_NO_WARNINGS
+```
+
+Otherwise the compilation may fail.
+
 
 How to Flash
 ------------
