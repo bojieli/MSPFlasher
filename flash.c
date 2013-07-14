@@ -3,6 +3,13 @@
 #include <string.h>
 #include <time.h>
 
+/* Product ID
+ * | Product Type | Product Version | Random ID | XOR checksum |
+ * |    1 byte    |     1 byte      |  6 bytes  |    1 byte    |
+ */
+#define PRODUCT_TYPE 1
+#define PRODUCT_VERSION 1
+
 #define RESOURCE_DIR "resource/"
 #define HEXFILE RESOURCE_DIR "RFID_G2001.txt"
 #define IDFILE "id.txt"
@@ -71,6 +78,19 @@ FILE* my_fopen(const char* file, const char* mode) {
     return fp;
 }
 
+void generate_id(unsigned char* id) {
+    id[0] = PRODUCT_TYPE & 0xFF;
+    id[1] = PRODUCT_VERSION & 0xFF;
+    
+    int i;
+    for (i=2; i<ID_SIZE-1; i++)
+        id[i] = rand() & 0xFF;
+
+    id[ID_SIZE-1] = 0;
+    for (i=0; i<ID_SIZE-1; i++)
+        id[ID_SIZE-1] ^= id[i];
+}
+
 int main() {
     int i;
 
@@ -116,8 +136,7 @@ int main() {
     while (1) {
         unsigned char id[ID_SIZE];
         do {
-            for (i=0; i<ID_SIZE; i++)
-                id[i] = rand() & 0xFF;
+            generate_id(id);
         } while (set_isin(id));
 
         for (i=0; i<ID_SIZE; i++) {
