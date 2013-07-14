@@ -8,7 +8,7 @@ If you want to run without cygwin, please create a Visual Studio project, add ``
 How to Flash
 ------------
 
-In cygwin, type ```./flash```.
+In cygwin, type ```./flash```. (Or double-click ```flash.exe``` in the folder)
 
 If this is not the first time of flashing, please put ```id.txt``` in the current folder. This file contains flashed IDs which guanrantees random-generated IDs do not conflict.
 
