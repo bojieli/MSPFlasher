@@ -1,7 +1,9 @@
 How to Build
 ------------
 
-In cygwin, type ```make``` and it will generate a ```flash.exe```.
+In cygwin, type ```make``` and it will generate a ```flash.exe```. The executive built in this way will not run without ```cygwin1.dll```.
+
+If you want to run without cygwin, please create a Visual Studio project, add ```flash.c``` to the project and compile.
 
 How to Flash
 ------------
