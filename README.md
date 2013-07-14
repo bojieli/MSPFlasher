@@ -1,22 +1,15 @@
 How to Build
 ------------
 
-In cygwin, type ```make``` and it will generate a ```flash.exe```. The executive built in this way will not run without ```cygwin1.dll```.
-
-If you want to run without cygwin, please create a Visual Studio project, add ```flash.c``` to the project and compile.
-
-In Visual Studio, please add a following line to the head of ```stdafx.h```:
-```
-#define _CRT_SECURE_NO_WARNINGS
-```
-
-Otherwise the compilation may fail.
+* Use cygwin: type ```make``` and it will generate a ```flash.exe```. The executive built in this way will not run without ```cygwin1.dll```.
+* Use Visual Studio (recommended): Create a new VS project, do NOT use Procompile Header (stdafx), add ```flash.c``` to the project and build.
 
 
 How to Flash
 ------------
 
-In cygwin, type ```./flash```. (Or double-click ```flash.exe``` in the folder)
+* If the executive is built with ```make```, open cygwin and goto the directory, type ```./flash```.
+* If the executive is built with Visual Studio, double-click ```flash.exe``` in the folder.
 
 If this is not the first time of flashing, please put ```id.txt``` in the current folder. This file contains flashed IDs which guanrantees random-generated IDs do not conflict.
 
