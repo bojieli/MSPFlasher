@@ -19,21 +19,21 @@
 
 # Card ID
 
-Card ID consists of 9 bytes range 0..255.
+Card ID 由9个字节构成。
 
-The first two bytes are Product Type and Product Version. These two fields are hardcoded in ```flash.c``` and defined by C macros.
+前两个字节是产品类型和产品批号。它们硬编码在 ```flash.c``` 的宏里，分别是 ```PRODUCT_TYPE``` 和 ```PRODUCT_VERSION```。
 
-Product Type should be the same within one type of product. This field is kept for further use when we have more products to inter-connect.
+产品类型在同种产品中保持一致，0x00 留作测试，0x01 代表电子学生证。以后做物联网的时候，可能需要不同种类的产品之间互联，这一字节就派上用场了。
 
-Product Version is for each software or hardware version of the product. Please increment this field on each software/hardware update, so we can identify product version from product ID. After changing, you have to rebuild ```flash.exe```.
+产品批号代表生产这种产品的批次，0x00 留作测试，0x01 代表第一次生产，0x02 代表第二次生产，以此类推（假定生产次数不超过255）。这样，当射频卡出现问题时，我们就可以根据这个字段定位是哪次生产的产品，进而定位是软件、硬件还是制造商的问题。原则上每次生产都要增加这一字段，增加后需要重新编译。
 
-Bytes 3~8 are random bytes.
+第 2～7 字节（从0开始计数）是随机字节。因此每个生产批次总共有 2^48 个唯一卡号。假定每批生产不超过 2^20（约100万个），则平均 2^28（2.7亿）个可能的ID中才被占用一个，几乎是无法猜测的。
 
-Byte 9 is checksum. In C,
+第 8 字节是校验和，采用异或校验：
 
 ```id[8] = id[0] ^ id[1] ^ ... ^ id[7]```
 
-Therefore the following condition holds for all Card IDs, which can be used to validate a card ID:
+因此可以用下式校验 Card ID 的合法性：
 
 ```id[0] ^ id[1] ^ ... ^ id[8] == 0```
 
