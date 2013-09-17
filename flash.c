@@ -18,7 +18,7 @@
 #define PRODUCT_TYPE 1
 #define PRODUCT_VERSION 1
 
-#ifdef _MSC_VER
+#ifdef _WIN32
 #define DIR_SEPARATOR "\\"
 #else
 #define DIR_SEPARATOR "/"
@@ -159,7 +159,11 @@ int main() {
 #ifdef _MSC_VER
     printf("MS VC %d", _MSC_VER);
 #else
+#ifdef _WIN32
+    printf("WIN32 compiler");
+#else
     printf("unknown compiler");
+#endif
 #endif
     printf("\n(C) 2013 GewuIT, all rights reserved.\n\n");
 
