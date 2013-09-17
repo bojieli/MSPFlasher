@@ -1,13 +1,10 @@
 # 编译运行
 
-1. 新建 Visual Studio 工程
-2. 选择控制台工程，不要使用预编译头（stdafx）
-3. 将 flash.c 加入工程
-4. 选择 Release 模式，编译
-5. 将 resource 文件夹复制到 Release 文件夹
-6. 双击运行 Release 文件夹中的 flash.exe
-
-在 cygwin 下编译的方法（不推荐）：make，生成 flash.exe，这样生成的程序需要有 cygwin1.dll 才能运行。
+1. 安装 MinGW
+2. 将 MinGW\bin 和 MinGW\msys\1.0\bin 加入 PATH
+3. 打开 cmd，进入此目录
+4. gcc -o flash.exe flash.c
+5. 将 flash.exe 和 resource 文件夹打成压缩包，经测试可以在 XP 和 Win8 上运行。
 
 # 烧写说明
 
